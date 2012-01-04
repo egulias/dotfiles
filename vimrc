@@ -2,7 +2,7 @@
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
-set nocompatible
+set nocompatible   " don't be compatible with legacy vi
 set ttyfast
 set number
 set smartindent
@@ -11,24 +11,59 @@ set autoindent
 set expandtab
 set tabstop=2
 set shiftwidth=2
-set noerrorbells
+set smarttab
+set noerrorbells   " do not beep like a crazy bitch
 set ignorecase
 set cursorline
 set textwidth=120
-set nolazyredraw " don't redraw screen while executing macros
+set nolazyredraw   " don't redraw screen while executing macros
+set synmaxcol=150  " stop rendering syntax colors in long lines (improves rendering performance)
+set ttyscroll=3    " improves redraw performance when scroll
 set encoding=utf-8
+set exrc           " enable per-directory .vimrc files
+set secure         " disable unsafe commands in local .vimrc files
+set incsearch      " find the next match as we type the search
+set hlsearch       " hilight searches by default
+set history=500    " store commands, search and marks between vim executions
+set viminfo='1000,f1,:1000,/1000
+
+if v:version >= 703
+  set colorcolumn=+1 " mark the ideal max text width (vim 7.3 or greater)
+endif
+
+
+if v:version >= 703
+  " persistent undo configuration (vim 7.3 or greater)
+  set undodir=~/.vim/undodir
+  set undofile
+  set undolevels=1000  " maximum number of changes that can be undoed
+  set undoreload=10000 " maximum number lines to save for undo on a buffer reload
+endif
 
 " basic ui options
 "set visualbell t_vb=
 set shm=atIWswxrnmlf " message formats
 set ruler
-set statusline=%f
-set showcmd
+set showcmd          " show us the command we're typing
 set showmode
 set mouse=a
 
+" Nice statusbar
+set laststatus=2
+set statusline=
+set statusline+=%<    " truncate line if to long
+set statusline+=\ %n  " buffer number
+set statusline+=:%f   " relative file path
+set statusline+=\ %m  " modified flag
+set statusline+=%r    " readonly flag
+set statusline+=%y    " file type
+set statusline+=%w%q  " window flag
+set statusline+=%=%{fugitive#statusline()} " Git branch info
+set statusline+=\ %-35.(line:\ %l\ of\ %L,\ col:\ %c%V\ (%P)%) " cursor coordinates
+
+
 set t_Co=256
-set background=dark
+set background=dark    " your eyes will thank you
 colorscheme wombat256
 
 " vim behaviour
@@ -36,32 +71,28 @@ command! W :w " for mistyping :w as :W
 
 " folding options
 set foldmethod=syntax
-set foldlevel=1
+set foldlevel=0
 set foldcolumn=3
-let php_folding=1
 let javaScript_fold=1
 let xml_syntax_folding=1
 
-" php options
-let php_sql_query=1
-let php_htmlInStrings=1
-
 " directories for .swp files
 set directory=~/.vim/swp//,/tmp//
-set wildignore+=**/build/**,vendor/**,**/cache/** " ignore symfony project data (doc, coverage, etc.)
-set wildignore+=*.o,*.phar,*.php~
+set tags+=tags;/ " search recursively upwards for the tags file
 
-syntax on
+syntax on           " enable syntax highlight
 filetype on
 filetype indent on
 filetype plugin on
 
 " mark the lines above 120 columns
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+highlight OverLength ctermbg=red ctermfg=white gui=undercurl guisp=red
 match OverLength /\%121v.\+/
 
-" hack to solve bug in SQL files in ubuntu
-let g:omni_sql_no_default_maps = 1
+" mark the columns that are close to overlength limit
+highlight LineProximity gui=undercurl guisp=orange
+let w:m1=matchadd('LineProximity', '\%<121v.\%>115v', -1)
+
 
 function! UpdateBundles()
   let cmd = "ruby ~/.dotfiles/vim/bin/vim-update-bundles.rb"
@@ -82,6 +113,17 @@ endfunction
 
 command! -complete=file UpdateBundles call UpdateBundles()
 
+
+"----------------------------------------------
+" black magic section, handle it with caution
+"-----------------------------------------------
+
+" variable name refactoring for local and global scopes
+" move te cursor to a variable name and pres gr o gR to apply the refactoring
+nnoremap gr gd[{V%:s/<C-R>///gc<left><left><left>
+nnoremap gR gD[{V%:s/<C-R>///gc<left><left><left>
+
+
 "**************************************************************
 "                      Bundle plugins                         *
 "**************************************************************
@@ -98,6 +140,7 @@ map <F1> :NERDTreeToggle<CR>
 " SuperTab
 " Bundle: https://github.com/ervandew/supertab.git
 let g:SuperTabDefaultCompletionType = "context" " SuperTab completion mode
+let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
 
 
 " Vim surround
@@ -105,7 +148,11 @@ let g:SuperTabDefaultCompletionType = "context" " SuperTab completion mode
 
 
 " PHP Syntax (updated to 5.3)
-" Bundle: https://github.com/vim-scripts/php.vim--Nicholson.git
+" Bundle: https://github.com/vim-scripts/php.vim--Garvin.git
+let php_sql_query = 1
+let php_html_in_strings = 1
+let php_parent_error_close = 1
+let php_folding = 1
 
 
 " PHP Check syntax
@@ -148,9 +195,40 @@ let delimitMate_visual_leader = ","
 " Bundle: https://github.com/vim-scripts/loremipsum.git
 
 
-" ConqueShell
-" Bundle: https://github.com/vim-scripts/Conque-Shell.git
-let g:ConqueTerm_Color = 1
+" Increment
+" Bundle: https://github.com/triglav/vim-visual-increment.git
+
+
+" Zen Coding
+" Bundle: http://github.com/mattn/zencoding-vim.git
+let g:user_zen_leader_key = '<c-z>'
+let g:user_zen_settings = { 'indentation': '  ' }
+
+
+" Gundo
+" Bundle: http://github.com/sjl/gundo.vim.git
+nnoremap <F3> :GundoToggle<CR>
+
+
+" Camel case motion
+" Bundle: https://github.com/vim-scripts/camelcasemotion.git
+
+
+" Fugitive, Git integration for vim. This plugin is used to show current branch
+" in vim's statusline. If you remove it, remember to modify the statusline settings
+" Bundle: https://github.com/tpope/vim-fugitive
+
+
+" MatchTag, highlight a paired HTML tags
+" Bundle: https://github.com/vim-scripts/MatchTag.git
+
+
+" Arg text object, motions for function/method arguments
+" Bundle: https://github.com/vim-scripts/argtextobj.vim.git
+
+
+" Inline snippets edit
+" Bundle: https://github.com/vim-scripts/inline_edit.vim.git
 
 
 "**************************************************************

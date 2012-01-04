@@ -1,11 +1,12 @@
 " file warmups
-autocmd BufNewFile *.go s-^-package main\r\rimport "fmt"\r\rfunc main() {\r\r}-
-autocmd BufNewFile *.pm s-^-package XXX;\r\ruse strict;\ruse warnings;\r\r1;-
-autocmd BufNewFile *.pl s-^-#!/usr/bin/perl\r\ruse strict;\ruse warnings;\r\r-
-autocmd BufNewFile *.sh s-^-#!/bin/bash\r\r-
-autocmd BufNewFile *.py s-^-#!/usr/bin/python\r\r-
-autocmd BufNewFile *.rb s-^-#!/usr/bin/ruby\r\r-
-autocmd BufNewFile *.c  s-^-#include <stdio.h>\r\rint main(int argc, char** argv) {\r\treturn 0;\r}-
+autocmd BufNewFile *.go  s-^-package main\r\rimport "fmt"\r\rfunc main() {\r\r}-
+autocmd BufNewFile *.pm  s-^-package XXX;\r\ruse strict;\ruse warnings;\r\r1;-
+autocmd BufNewFile *.pl  s-^-#!/usr/bin/perl\r\ruse strict;\ruse warnings;\r\r-
+autocmd BufNewFile *.sh  s-^-#!/bin/bash\r\r-
+autocmd BufNewFile *.py  s-^-#!/usr/bin/python\r\r-
+autocmd BufNewFile *.rb  s-^-#!/usr/bin/ruby\r\r-
+autocmd BufNewFile *.c   s-^-#include <stdio.h>\r\rint main(int argc, char** argv) {\r\treturn 0;\r}-
+autocmd BufNewFile *.php s-^-<?php\r\r-
 
 " remove trailing spaces
 function! <SID>StripTrailingWhitespaces()
@@ -20,15 +21,35 @@ function! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfunction
 
-autocmd BufWritePre *.py             :call <SID>StripTrailingWhitespaces()
-autocmd BufWritePre *.rb             :call <SID>StripTrailingWhitespaces()
-autocmd BufWritePre *.sh             :call <SID>StripTrailingWhitespaces()
-autocmd BufWritePre *.{js,json}      :call <SID>StripTrailingWhitespaces()
-autocmd BufWritePre *.css            :call <SID>StripTrailingWhitespaces()
-autocmd BufWritePre *.{php,twig,yml} :call <SID>StripTrailingWhitespaces()
-autocmd BufWritePre *.sql            :call <SID>StripTrailingWhitespaces()
-autocmd BufWritePre *.{html,htm,xml} :call <SID>StripTrailingWhitespaces()
-autocmd BufWritePre *.{c,cpp,h,hpp}  :call <SID>StripTrailingWhitespaces()
+" Reformat PHP code following these style rules:
+" - In control structures place opening brace in same line separated by one space
+" - In methods/functions place opening brace in new line
+" - In control structures place a space between keyword and parentheses
+function! <SID>CodeStylingPHP()
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    %s/){$/) {/e
+    %s/function\(\s\+\S\+\)(\(.*\))\s*{$/function\1(\2)\r\t{/e
+    %s/\(if\|for\|foreach\|while\|do\|switch\|catch\)(/\1 (/e
+    retab
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+
+autocmd BufWritePre *.py                     :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre *.rb                     :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre *.sh                     :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre *.{js,json}              :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre *.css                    :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre *.{php,twig,ctp,yml}     :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre *.php                    :call <SID>CodeStylingPHP()
+autocmd BufWritePre *.sql                    :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre *.{html,htm,xml,xsd,xsl} :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre *.{c,cpp,h,hpp}          :call <SID>StripTrailingWhitespaces()
 
 " syntax colors
 autocmd BufRead *.twig set filetype=htmltwig
@@ -44,3 +65,46 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
 
 " nicer comments
 autocmd BufNewFile,BufRead *.h,*.php set comments=s:/**,mb:*,ex:*/
+
+" auto-update .vimrc file each time you edit it
+augroup VimReload
+    au!
+    au BufWritePost $MYVIMRC source $MYVIMRC
+augroup END
+
+" Magically build interim directories if necessary
+function! AskQuit (msg, options, quit_option)
+    if confirm(a:msg, a:options) == a:quit_option
+        exit
+    endif
+endfunction
+
+function! EnsureDirExists ()
+    let required_dir = expand("%:h")
+    if !isdirectory(required_dir)
+        call AskQuit("Parent directory '" . required_dir . "' doesn't exist.",
+             \ "&Create it\nor &Quit?", 2)
+
+        try
+            call mkdir( required_dir, 'p' )
+        catch
+            call AskQuit("Can't create '" . required_dir . "'",
+            \ "&Quit\nor &Continue anyway?", 1)
+        endtry
+    endif
+endfunction
+
+augroup AutoMkdir
+    autocmd!
+    autocmd BufNewFile * :call EnsureDirExists()
+augroup END
+
+
+" enable omni completion for various languages
+autocmd FileType python     set omnifunc=pythoncomplete#Complete
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType html       set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css        set omnifunc=csscomplete#CompleteCSS
+autocmd FileType xml        set omnifunc=xmlcomplete#CompleteTags
+autocmd FileType php        set omnifunc=phpcomplete#CompletePHP
+autocmd FileType c          set omnifunc=ccomplete#Complete
