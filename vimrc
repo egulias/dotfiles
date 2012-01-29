@@ -6,6 +6,7 @@ set nocompatible   " don't be compatible with legacy vi
 set ttyfast
 set number
 set smartindent
+set backspace=indent,eol,start
 set cindent
 set autoindent
 set expandtab
@@ -48,20 +49,7 @@ set showcmd          " show us the command we're typing
 set showmode
 set mouse=a
 
-" Nice statusbar
 set laststatus=2
-set statusline=
-set statusline+=%<    " truncate line if to long
-set statusline+=\ %n  " buffer number
-set statusline+=:%f   " relative file path
-set statusline+=\ %m  " modified flag
-set statusline+=%r    " readonly flag
-set statusline+=%y    " file type
-set statusline+=%w%q  " window flag
-set statusline+=%=%{fugitive#statusline()} " Git branch info
-set statusline+=\ %-35.(line:\ %l\ of\ %L,\ col:\ %c%V\ (%P)%) " cursor coordinates
-
-
 set t_Co=256
 set background=dark    " your eyes will thank you
 colorscheme wombat256
@@ -84,6 +72,9 @@ syntax on           " enable syntax highlight
 filetype on
 filetype indent on
 filetype plugin on
+
+" spelling options
+set spelllang=es_es,en_us
 
 " mark the lines above 120 columns
 highlight OverLength ctermbg=red ctermfg=white gui=undercurl guisp=red
@@ -155,16 +146,13 @@ let php_parent_error_close = 1
 let php_folding = 1
 
 
+" PHP Documentor for Vim
+" Bundle: https://github.com/vim-scripts/PDV--phpDocumentor-for-Vim.git
+nnoremap ,pd :call PhpDocSingle()<CR>
+
+
 " PHP Check syntax
 " Bundle: https://github.com/tomtom/checksyntax_vim.git
-
-
-" Command-T
-" Bundle: https://github.com/vim-scripts/Command-T.git
-" BundleCommand: cd ruby/command-t; ruby extconf.rb; make
-nmap <silent> ,t :CommandT<CR>
-nmap <silent> ,b :CommandTBuffer<CR>
-let g:CommandTCancelMap=['<ESC>','<C-c>'] " remap the close action to solve konsole terminal problems
 
 
 " TagBar
@@ -214,11 +202,6 @@ nnoremap <F3> :GundoToggle<CR>
 " Bundle: https://github.com/vim-scripts/camelcasemotion.git
 
 
-" Fugitive, Git integration for vim. This plugin is used to show current branch
-" in vim's statusline. If you remove it, remember to modify the statusline settings
-" Bundle: https://github.com/tpope/vim-fugitive
-
-
 " MatchTag, highlight a paired HTML tags
 " Bundle: https://github.com/vim-scripts/MatchTag.git
 
@@ -229,6 +212,20 @@ nnoremap <F3> :GundoToggle<CR>
 
 " Inline snippets edit
 " Bundle: https://github.com/vim-scripts/inline_edit.vim.git
+
+
+" Vim powerline statusbar
+" Bundle: http://github.com/Lokaltog/vim-powerline.git
+" BundleCommand: git checkout develop
+"let g:Powerline_symbols = 'fancy'
+
+
+" Command-T
+" Bundle: https://github.com/vim-scripts/Command-T.git
+" BundleCommand: cd ruby/command-t; ruby extconf.rb; make
+nmap <silent> ,t :CommandT<CR>
+nmap <silent> ,b :CommandTBuffer<CR>
+let g:CommandTCancelMap=['<ESC>','<C-c>'] " remap the close action to solve konsole terminal problems
 
 
 "**************************************************************

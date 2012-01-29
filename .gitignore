@@ -1,6 +1,8 @@
 vim/swp
 vim/undodir
+vim/spell
 tags
 vim/doc
 vim/bundle/*
 vim/.netrwhist
+vim/Trashed-Bundles
