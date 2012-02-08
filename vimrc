@@ -57,6 +57,7 @@ colorscheme wombat256
 
 " vim behaviour
 command! W :w " for mistyping :w as :W
+let mapleader = ',' " remap leader key to ,
 
 " folding options
 set foldmethod=syntax
@@ -149,7 +150,7 @@ let php_folding = 1
 
 " PHP Documentor for Vim
 " Bundle: https://github.com/vim-scripts/PDV--phpDocumentor-for-Vim.git
-nnoremap ,pd :call PhpDocSingle()<CR>
+nnoremap <Leader>pd :call PhpDocSingle()<CR>
 
 
 " PHP Check syntax
@@ -221,11 +222,19 @@ nnoremap <F3> :GundoToggle<CR>
 "let g:Powerline_symbols = 'fancy'
 
 
+" C++ omnicomplete feature
+" Bundle: http://github.com/vim-scripts/OmniCppComplete.git
+
+
+" Better syntax highligh for C++
+" Bundle: http://github.com/vim-scripts/cpp.vim--Skvirsky
+
+
 " Command-T
 " Bundle: https://github.com/vim-scripts/Command-T.git
 " BundleCommand: cd ruby/command-t; ruby extconf.rb; make
-nmap <silent> ,t :CommandT<CR>
-nmap <silent> ,b :CommandTBuffer<CR>
+nmap <silent> <Leader>t :CommandT<CR>
+nmap <silent> <Leader>T :CommandTBuffer<CR>
 let g:CommandTCancelMap=['<ESC>','<C-c>'] " remap the close action to solve konsole terminal problems
 
 
