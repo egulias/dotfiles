@@ -53,7 +53,12 @@ set mouse=a
 set laststatus=2
 set t_Co=256
 set background=dark    " your eyes will thank you
-colorscheme wombat256
+
+if has("gui_running")
+  colorscheme vombato
+else
+  colorscheme wombat256
+endif
 
 " vim behaviour
 command! W :w " for mistyping :w as :W
@@ -122,39 +127,51 @@ nnoremap gR gD[{V%:s/<C-R>///gc<left><left><left>
 "**************************************************************
 
 " Snipmate
-" Bundle: https://github.com/msanders/snipmate.vim.git
+" Bundle: http://github.com/msanders/snipmate.vim.git
 
 
 " NerdTree
-" Bundle: https://github.com/scrooloose/nerdtree.git
+" Bundle: http://github.com/scrooloose/nerdtree.git
 map <F1> :NERDTreeToggle<CR>
 
 
-" SuperTab
-" Bundle: https://github.com/ervandew/supertab.git
-let g:SuperTabDefaultCompletionType = "context" " SuperTab completion mode
-let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
+" Neocomplcache, better completion and intellisense-like features
+" Bundle: http://github.com/Shougo/neocomplcache.git
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_smart_case = 1
+let g:neocomplcache_enable_camel_case_completion = 1
+let g:neocomplcache_enable_underbar_completion = 1
 
 
 " Vim surround
-" Bundle: https://github.com/tpope/vim-surround.git
+" Bundle: http://github.com/tpope/vim-surround.git
 
 
-" PHP Syntax (updated to 5.3)
-" Bundle: https://github.com/vim-scripts/php.vim--Garvin.git
+" PHP Syntax (updated to 5.4)
+" Bundle: http://github.com/shawncplus/php.vim.git
 let php_sql_query = 1
-let php_html_in_strings = 1
+let php_htmlInStrings = 1
 let php_parent_error_close = 1
-let php_folding = 1
+let php_folding = 3
+let php_baselib = 1
+let php_special_vars = 1
 
 
 " PHP Documentor for Vim
-" Bundle: https://github.com/vim-scripts/PDV--phpDocumentor-for-Vim.git
+" Bundle: https://github.com/mikehaertl/pdv-standalone
 nnoremap <Leader>pd :call PhpDocSingle()<CR>
 
 
-" PHP Check syntax
-" Bundle: https://github.com/tomtom/checksyntax_vim.git
+" Syntastic, syntax checker for various languages
+" Bundle: http://github.com/scrooloose/syntastic.git
+"
+" Clone this repository into PHP CodeSniffer standards directory:
+"
+" git clone http://github.com/opensky/Symfony2-coding-standard.git Symfony2
+"
+" And execute this command:
+"
+" phpcs --config-set default_standard Symfony2
 
 
 " TagBar
@@ -163,16 +180,16 @@ map <F2> :TagbarToggle<CR>
 
 
 " Tabular
-" Bundle: https://github.com/godlygeek/tabular.git
+" Bundle: http://github.com/godlygeek/tabular.git
 
 
 " Ack, a better grep 
-" Bundle: https://github.com/mileszs/ack.vim
+" Bundle: http://github.com/mileszs/ack.vim
 let g:ackprg="ack-grep -H --nocolor --nogroup --column"
 
 
 " Match it
-" Bundle: https://github.com/vim-scripts/matchit.zip.git
+" Bundle: http://github.com/vim-scripts/matchit.zip.git
 
 
 " Less annoying delimiters - DelimitMate
@@ -182,11 +199,11 @@ let delimitMate_visual_leader = ","
 
 
 " Lorem ipsum dummy text generator
-" Bundle: https://github.com/vim-scripts/loremipsum.git
+" Bundle: http://github.com/vim-scripts/loremipsum.git
 
 
 " Increment
-" Bundle: https://github.com/triglav/vim-visual-increment.git
+" Bundle: http://github.com/triglav/vim-visual-increment.git
 
 
 " Zen Coding
@@ -201,24 +218,29 @@ nnoremap <F3> :GundoToggle<CR>
 
 
 " Camel case motion
-" Bundle: https://github.com/vim-scripts/camelcasemotion.git
+" Bundle: http://github.com/vim-scripts/camelcasemotion.git
 
 
 " MatchTag, highlight a paired HTML tags
-" Bundle: https://github.com/vim-scripts/MatchTag.git
+" Bundle: http://github.com/vim-scripts/MatchTag.git
 
 
 " Arg text object, motions for function/method arguments
-" Bundle: https://github.com/vim-scripts/argtextobj.vim.git
+" Bundle: http://github.com/vim-scripts/argtextobj.vim.git
 
 
 " Inline snippets edit
-" Bundle: https://github.com/vim-scripts/inline_edit.vim.git
+" Bundle: http://github.com/vim-scripts/inline_edit.vim.git
+
+
+" Fugitive, Git integration for vim. This plugin is used to show current branch
+" in vim's statusline.
+" Bundle: https://github.com/tpope/vim-fugitive
 
 
 " Vim powerline statusbar
 " Bundle: http://github.com/Lokaltog/vim-powerline.git
-" BundleCommand: git checkout develop; git pull origin develop
+" BundleCommand: git checkout develop; git pull origin develop; rm -f *.cache
 "let g:Powerline_symbols = 'fancy'
 
 
@@ -228,6 +250,26 @@ nnoremap <F3> :GundoToggle<CR>
 
 " Better syntax highligh for C++
 " Bundle: http://github.com/vim-scripts/cpp.vim--Skvirsky
+
+
+" Switch between .cpp and .hpp files
+" Bundle: https://github.com/vim-scripts/FSwitch.git
+nnoremap <F8> :FSHere<CR>
+au! BufEnter *.cpp,*.c let b:fswitchdst = 'hpp,h' | let b:fswitchlocs = './,../include'
+au! BufEnter *.hpp,*.h let b:fswitchdst = 'cpp,c' | let b:fswitchlocs = './,../src'
+let g:protodefprotogetter = $HOME . '/.vim/bundle/ProtoDef/pullproto.pl'
+
+
+" Generates skeleton methods using C++ headers
+" Bundle: https://github.com/vim-scripts/ProtoDef.git
+
+
+" Vombato, an improved wombat color scheme
+" Bundle: https://github.com/molok/vim-vombato-colorscheme.git
+
+
+" Buffet, plugin to handle list of buffers
+" Bundle: https://github.com/vim-scripts/buffet.vim.git
 
 
 " Command-T
@@ -242,7 +284,8 @@ let g:CommandTCancelMap=['<ESC>','<C-c>'] " remap the close action to solve kons
 "                Autocmds and keybindings                     *
 "**************************************************************
 
-source ~/.vimrc-keymaps
+" load keymaps after plugin load
+autocmd VimEnter * source ~/.vimrc-keymaps
 
 if has("autocmd")
   source ~/.vimrc-au
