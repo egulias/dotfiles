@@ -6,6 +6,7 @@ autocmd BufNewFile *.sh  s-^-#!/bin/bash\r\r-
 autocmd BufNewFile *.py  s-^-#!/usr/bin/python\r\r-
 autocmd BufNewFile *.rb  s-^-#!/usr/bin/ruby\r\r-
 autocmd BufNewFile *.c   s-^-#include <stdio.h>\r\rint main(int argc, char** argv) {\r\treturn 0;\r}-
+autocmd BufNewFile *.cpp s-^-#include <iostream>\r\rusing namespace std;\r\rint main(int argc, char* argv[]) {\r\treturn 0;\r}-
 autocmd BufNewFile *.php s-^-<?php\r\r-
 
 " remove trailing spaces
@@ -33,8 +34,9 @@ function! <SID>CodeStylingPHP()
     " Do the business:
     %s/){$/) {/e
     %s/function\(\s\+\S\+\)(\(.*\))\s*{$/function\1(\2)\r\t{/e
-    %s/\(if\|for\|foreach\|while\|do\|switch\|catch\)(/\1 (/e
-    %s/else{$/else {/e
+    %s/\(\s\+if\|\s\+for\|\s\+foreach\|\s\+while\|\s\+do\|\s\+switch\|\s\+catch\)(/\1 (/e
+    %s/\(\s\+else\|\s\+try\){$/\1 {/e
+    %s/}catch/} catch/e
     retab
     " Clean up: restore previous search history, and cursor position
     let @/=_s
@@ -55,20 +57,28 @@ autocmd BufWritePre *.{c,cpp,h,hpp}          :call <SID>StripTrailingWhitespaces
 " Twig syntax colors
 autocmd BufRead *.twig set filetype=htmltwig
 
-" XML folding settings
+" folding settings
 autocmd FileType xml setlocal foldmethod=indent foldlevel=1
+autocmd FileType cpp,hpp set foldlevel=1 foldmethod=syntax
 
 " decrease XML, HTML and Twig tabs to 2 spaces
 autocmd FileType xml,html,htmltwig set tabstop=2 shiftwidth=2
 
+" set textwidth to 80 columns in txt files
+autocmd FileType txt set textwidth=80
+
 " view special characters
-autocmd filetype xhtml,html,xml,php,yaml,htmltwig set list
-autocmd filetype xhtml,html,xml set listchars=tab:▸\ 
-autocmd filetype php,yaml,htmltwig set listchars=tab:▸\ ,eol:¬
+autocmd FileType xhtml,html,xml,php,yaml,htmltwig,cpp,hpp set list
+autocmd FileType xhtml,html,xml set listchars=tab:▸\ 
+autocmd FileType php,yaml,htmltwig,cpp,hpp set listchars=tab:▸\ ,eol:¬
 
 " Remember last location in file
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
     \| exe "normal g'\"" | endif
+
+" save and restore current file view (folds openend/closed, cursor, etc)
+autocmd BufWinLeave * silent! mkview
+autocmd BufWinEnter * silent! loadview
 
 " nicer comments
 autocmd BufNewFile,BufRead *.h,*.php set comments=s:/**,mb:*,ex:*/
