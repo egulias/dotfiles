@@ -7,7 +7,7 @@ set tabstop=2
 set shiftwidth=2
 
 " ignore this directories/files
-set wildignore+=build/**,doc/**
+set wildignore+=**/doc/**
 
 " Generate new tags with command
 "
@@ -16,5 +16,6 @@ set wildignore+=build/**,doc/**
 " include libraries tags
 set tags+=~/.vim/tags/libxml2
 set tags+=~/.vim/tags/mysql
-"set tags+=~/.vim/tags/qt4
-"set tags+=~/.vim/tags/gl
+set tags+=~/.vim/tags/cpp
+set tags+=~/.vim/tags/boost_date_time
+set tags+=~/.vim/tags/mysql

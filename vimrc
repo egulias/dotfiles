@@ -22,8 +22,6 @@ set synmaxcol=150   " stop rendering syntax colors in long lines (improves rende
 set ttyscroll=3     " improves redraw performance when scroll
 set encoding=utf-8
 set fileformat=unix " endline setted to \n
-set exrc            " enable per-directory .vimrc files
-set secure          " disable unsafe commands in local .vimrc files
 set incsearch       " find the next match as we type the search
 set hlsearch        " hilight searches by default
 set history=500     " store commands, search and marks between vim executions
@@ -74,6 +72,7 @@ let xml_syntax_folding=1
 " directories for .swp files
 set directory=~/.vim/swp//,/tmp//
 set tags+=tags;/ " search recursively upwards for the tags file
+set wildignore=**/cache/**,**/build/**,**/logs/**
 
 syntax on           " enable syntax highlight
 filetype on
@@ -174,6 +173,10 @@ let php_baselib = 1
 let php_special_vars = 1
 
 
+" PHP Debugger
+" Bundle: https://github.com/vim-scripts/DBGPavim.git
+
+
 " PHP Documentor for Vim
 " Bundle: https://github.com/mikehaertl/pdv-standalone
 nnoremap <Leader>pd :call PhpDocSingle()<CR>
@@ -194,6 +197,13 @@ nnoremap <Leader>pd :call PhpDocSingle()<CR>
 " TagBar
 " Bundle: git://github.com/majutsushi/tagbar
 map <F2> :TagbarToggle<CR>
+let g:tagbar_iconchars = ['▾', '▸']
+let g:tagbar_foldlevel = 1
+let g:tagbar_autofocus = 1
+
+
+" Local vimrc, enables per-project configurations
+" Bundle: http://github.com/thinca/vim-localrc.git
 
 
 " Tabular
@@ -293,6 +303,8 @@ let g:protodefprotogetter = $HOME . '/.vim/bundle/ProtoDef/pullproto.pl'
 " Bundle: https://github.com/kien/ctrlp.vim.git
 nmap <silent> <Leader>t :CommandT<CR>
 let g:ctrlp_map = '<Leader>t'
+let g:ctrlp_use_caching = 1
+let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
 
 
 "**************************************************************
