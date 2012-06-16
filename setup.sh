@@ -28,10 +28,10 @@ configure_git() {
 
 echo "Saving old files ..."
 for file in ~/.vimrc ~/.vim ~/.vimrc-keymaps ~/.vimrc-au ~/.bashrc ~/.bash_aliases ~/.bash_colors; do
-  if [ ! -L $file ]; then
-    mv $file "$file.`date +%s`.old"
-  else
+  if [ -L $file ]; then
     rm -f $file
+  elif [ -e $file ]; then
+    mv $file "$file.`date +%s`.old"
   fi
 done
 
@@ -44,7 +44,7 @@ echo "Installing bundles..."
 if [ $(which ruby 2>/dev/null) ]; then
   ruby `pwd`/vim/bin/vim-update-bundles.rb
 else
-  echo "ERROR: ruby is not installed. You have to install ruby and ruby-dev packages!"
+  echo "ERROR: ruby is not installed. You have to install ruby package!"
 fi
 
 install_helper_scripts

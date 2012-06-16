@@ -28,7 +28,7 @@ BG_NULL=00
 ##
 ESC="\033"
 NORMAL="\[$ESC[m\]"
-RESET="\[$ESC[${DULL};${FG_WHITE};${BG_NULL}m\]"
+RST="\[$ESC[${DULL};${FG_WHITE};${BG_NULL}m\]"
 
 ##
 # Shortcuts for Colored Text ( Bright and FG Only )
@@ -59,4 +59,3 @@ BRIGHT_WHITE="\[$ESC[${BRIGHT};${FG_WHITE}m\]"
 REV_CYAN="\[$ESC[${DULL};${BG_WHITE};${BG_CYAN}m\]"
 REV_RED="\[$ESC[${DULL};${FG_YELLOW}; ${BG_RED}m\]"
 
-PROMPT_COMMAND='export ERR=$?'

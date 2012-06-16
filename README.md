@@ -13,11 +13,6 @@ as `~/.$file-name.%date%.old` . To install, simple input this commands:
 And you're done! You may wanna edit your `~/.vimrc` or `~/.vimrc-keymaps` , but i've already provided it
 with sensible defaults ;)
 
-Note that if you want to use Command-T plugin, first you have to install the packages `ruby-dev` and `gcc`. 
-This plugin needs to compile a small part of native code, although this compilation is managed internaly by the 
-update process, it can cause errors if the compiler or development files are not installed. Please read the Command-T 
-[documentation](https://wincent.com/products/command-t) for a full description of installation requirements. 
-
 Managing plugins/bundles
 ------------------------
    
@@ -34,9 +29,12 @@ Overwrite defaults per project
 ------------------------------
 
 You can customize properties such as smarttabs, tabstop, etc. in each of your projects. Just drop your customized 
-`.vimrc` file in your project root directory (or better make a symlink) and vim will load your new properties. As simple as it sounds!
+`.local.vimrc` file in your project root directory (or better make a symlink) and vim will load your new properties. 
+As simple as it sounds!
 
-I provided a sample called `vimrc.sf2.sample` suited for Symfony2 projects.
+I provided a sample called `local.php.vimrc` suited for Symfony2 projects.
+
+For more info visit [vim-localrc](https://github.com/thinca/vim-localrc) page
 
 
 ### How do I install new bundles?

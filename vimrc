@@ -22,8 +22,6 @@ set synmaxcol=150   " stop rendering syntax colors in long lines (improves rende
 set ttyscroll=3     " improves redraw performance when scroll
 set encoding=utf-8
 set fileformat=unix " endline setted to \n
-set exrc            " enable per-directory .vimrc files
-set secure          " disable unsafe commands in local .vimrc files
 set incsearch       " find the next match as we type the search
 set hlsearch        " hilight searches by default
 set history=500     " store commands, search and marks between vim executions
@@ -74,6 +72,7 @@ let xml_syntax_folding=1
 " directories for .swp files
 set directory=~/.vim/swp//,/tmp//
 set tags+=tags;/ " search recursively upwards for the tags file
+set wildignore=**/cache/**,**/build/**,**/logs/**
 
 syntax on           " enable syntax highlight
 filetype on
@@ -138,10 +137,27 @@ map <F1> :NERDTreeToggle<CR>
 " Neocomplcache, better completion and intellisense-like features
 " Bundle: http://github.com/Shougo/neocomplcache.git
 let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_enable_camel_case_completion = 1
-let g:neocomplcache_enable_underbar_completion = 1
-
+"let g:neocomplcache_enable_smart_case = 1
+"let g:neocomplcache_enable_camel_case_completion = 1
+"let g:neocomplcache_enable_underbar_completion = 1
+"let g:neocomplcache_auto_completion_start_length = 4
+"
+"" Enable heavy omni completion.
+"if !exists('g:neocomplcache_omni_patterns')
+"  let g:neocomplcache_omni_patterns = {}
+"endif
+"let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
+"let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
+"let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
+"
+"let g:neocomplcache_disable_auto_complete = 1
+"
+"inoremap <expr><TAB> pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : "\<C-x>\<C-u>"
+"function! s:check_back_space()"{{{
+"  let col = col('.') - 1
+"  return !col || getline('.')[col - 1] =~ '\s'
+"endfunction"}}
 
 " Vim surround
 " Bundle: http://github.com/tpope/vim-surround.git
@@ -155,6 +171,10 @@ let php_parent_error_close = 1
 let php_folding = 3
 let php_baselib = 1
 let php_special_vars = 1
+
+
+" PHP Debugger
+" Bundle: https://github.com/vim-scripts/DBGPavim.git
 
 
 " PHP Documentor for Vim
@@ -177,6 +197,13 @@ nnoremap <Leader>pd :call PhpDocSingle()<CR>
 " TagBar
 " Bundle: git://github.com/majutsushi/tagbar
 map <F2> :TagbarToggle<CR>
+let g:tagbar_iconchars = ['▾', '▸']
+let g:tagbar_foldlevel = 1
+let g:tagbar_autofocus = 1
+
+
+" Local vimrc, enables per-project configurations
+" Bundle: http://github.com/thinca/vim-localrc.git
 
 
 " Tabular
@@ -241,7 +268,9 @@ nnoremap <F3> :GundoToggle<CR>
 " Vim powerline statusbar
 " Bundle: http://github.com/Lokaltog/vim-powerline.git
 " BundleCommand: git checkout develop; git pull origin develop; rm -f *.cache
-"let g:Powerline_symbols = 'fancy'
+if has("gui_running")
+  let g:Powerline_symbols = 'fancy'
+endif
 
 
 " C++ omnicomplete feature
@@ -272,12 +301,12 @@ let g:protodefprotogetter = $HOME . '/.vim/bundle/ProtoDef/pullproto.pl'
 " Bundle: https://github.com/vim-scripts/buffet.vim.git
 
 
-" Command-T
-" Bundle: https://github.com/vim-scripts/Command-T.git
-" BundleCommand: cd ruby/command-t; ruby extconf.rb; make
+" Ctrl+P
+" Bundle: https://github.com/kien/ctrlp.vim.git
 nmap <silent> <Leader>t :CommandT<CR>
-nmap <silent> <Leader>T :CommandTBuffer<CR>
-let g:CommandTCancelMap=['<ESC>','<C-c>'] " remap the close action to solve konsole terminal problems
+let g:ctrlp_map = '<Leader>t'
+let g:ctrlp_use_caching = 1
+let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
 
 
 "**************************************************************
