@@ -26,6 +26,7 @@ set incsearch       " find the next match as we type the search
 set hlsearch        " hilight searches by default
 set history=500     " store commands, search and marks between vim executions
 set viminfo='1000,f1,:1000,/1000
+set cf              " Enable error files & error jumping
 
 if v:version >= 703
   set colorcolumn=+1 " mark the ideal max text width (vim 7.3 or greater)
@@ -164,7 +165,7 @@ let g:neocomplcache_enable_at_startup = 1
 
 
 " PHP Syntax (updated to 5.4)
-" Bundle: http://github.com/shawncplus/php.vim.git
+" Bundle: https://github.com/vim-scripts/phpvim.git
 let php_sql_query = 1
 let php_htmlInStrings = 1
 let php_parent_error_close = 1
@@ -281,6 +282,10 @@ endif
 " Bundle: http://github.com/vim-scripts/cpp.vim--Skvirsky
 
 
+" Better syntax dor C++ STL
+" Bundle: https://github.com/vim-scripts/stl.git
+
+
 " Switch between .cpp and .hpp files
 " Bundle: https://github.com/vim-scripts/FSwitch.git
 nnoremap <F8> :FSHere<CR>
@@ -311,6 +316,14 @@ nmap <silent> <Leader>t :CommandT<CR>
 let g:ctrlp_map = '<Leader>t'
 let g:ctrlp_use_caching = 1
 let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
+
+
+" Rails plugin
+" Bundle: https://github.com/tpope/vim-rails.git
+
+
+" Vim ruby
+" Bundle: https://github.com/vim-ruby/vim-ruby.git
 
 
 "**************************************************************
