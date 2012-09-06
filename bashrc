@@ -52,7 +52,7 @@ esac
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
-#force_color_prompt=yes
+force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -88,11 +88,11 @@ if [ "$color_prompt" = yes ]; then
   fi
 
   # prompt modules
-  host="${BRIGHT_VIOLET}┌ ${RST}\${debian_chroot:+($debian_chroot)}$host_color\u@\h"
-  date="${RST}\d "
-  ruby="${BRIGHT_VIOLET}♦ \$(ruby_version)${RST}"
-  memory="M\$($HOME/.dotfiles/scripts/prompt_memory_status)"
-  battery="\$($HOME/.dotfiles/scripts/prompt_battery_status)"
+  host="${BRIGHT_VIOLET}${RST}\${debian_chroot:+($debian_chroot)}$host_color\u@\h"
+  #date="${RST}\d "
+  #ruby="${BRIGHT_VIOLET}♦ \$(ruby_version)${RST}"
+  #memory="M\$($HOME/.dotfiles/scripts/prompt_memory_status)"
+  #battery="\$($HOME/.dotfiles/scripts/prompt_battery_status)"
   git="${BRIGHT_YELLOW}\$(__git_ps1)${RST}"
   path="${BRIGHT_BLUE}\w${RST}"
   caret="\$"
@@ -101,7 +101,7 @@ if [ "$color_prompt" = yes ]; then
     caret="#"
   fi
 
-  PS1="${host} ${ruby} ${date} ${memory} ${battery}\n${BRIGHT_VIOLET}└${RST} ${path}${git}${caret} "
+  PS1="${host}${ruby}${date}${memory}${battery}${BRIGHT_VIOLET}${path}${git} ${caret} "
 
   unset host
   unset date
