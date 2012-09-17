@@ -297,7 +297,7 @@ let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
 "
 " PHPQATools
 " Bundle: https://github.com/joonty/vim-phpqa.git
-let g:phpqa_messdetector_ruleset = "~/.vim/phpmd/phpmd.xml"
+let g:phpqa_messdetector_ruleset = "~/.vim/phpmd.xml"
 let g:phpqa_codesniffer_args = "--standard=PSR2"
 
 "**************************************************************
