@@ -292,6 +292,8 @@ let g:ctrlp_use_caching = 1
 let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
 
 
+" Rainbow parentheses
+" Bundle: https://github.com/vim-scripts/Rainbow-Parentheses-Improved.git
 
 "**************************************************************
 "                Autocmds and keybindings                     *
