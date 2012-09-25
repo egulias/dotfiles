@@ -211,7 +211,7 @@ let g:tagbar_autofocus = 1
 " Bundle: http://github.com/godlygeek/tabular.git
 
 
-" Ack, a better grep 
+" Ack, a better grep
 " Bundle: http://github.com/mileszs/ack.vim
 let g:ackprg="ack-grep -H --nocolor --nogroup --column"
 
@@ -274,37 +274,11 @@ if has("gui_running")
 endif
 
 
-" C++ omnicomplete feature
-" Bundle: http://github.com/vim-scripts/OmniCppComplete.git
-
-
-" Better syntax highligh for C++
-" Bundle: http://github.com/vim-scripts/cpp.vim--Skvirsky
-
-
-" Better syntax dor C++ STL
-" Bundle: https://github.com/vim-scripts/stl.git
-
-
-" Switch between .cpp and .hpp files
-" Bundle: https://github.com/vim-scripts/FSwitch.git
-nnoremap <F8> :FSHere<CR>
-au! BufEnter *.cpp,*.c let b:fswitchdst = 'hpp,h' | let b:fswitchlocs = './,../include'
-au! BufEnter *.hpp,*.h let b:fswitchdst = 'cpp,c' | let b:fswitchlocs = './,../src'
-let g:protodefprotogetter = $HOME . '/.vim/bundle/ProtoDef/pullproto.pl'
-
-
-" Generates skeleton methods using C++ headers
-" Bundle: https://github.com/vim-scripts/ProtoDef.git
-
-
 " Vombato, an improved wombat color scheme
 " Bundle: https://github.com/molok/vim-vombato-colorscheme.git
 
-
 " Pyte, a light color schema
 " Bundle: https://github.com/vim-scripts/pyte.git
-
 
 " Buffet, plugin to handle list of buffers
 " Bundle: https://github.com/vim-scripts/buffet.vim.git
@@ -317,16 +291,14 @@ let g:ctrlp_map = '<Leader>t'
 let g:ctrlp_use_caching = 1
 let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
 
+
 " Rainbow parentheses
 " Bundle: https://github.com/vim-scripts/Rainbow-Parentheses-Improved.git
-
-" Rails plugin
-" Bundle: https://github.com/tpope/vim-rails.git
-
-
-" Vim ruby
-" Bundle: https://github.com/vim-ruby/vim-ruby.git
-
+"
+" PHPQATools
+" Bundle: https://github.com/joonty/vim-phpqa.git
+let g:phpqa_messdetector_ruleset = "~/.vim/phpmd.xml"
+let g:phpqa_codesniffer_args = "--standard=PSR2"
 
 "**************************************************************
 "                Autocmds and keybindings                     *

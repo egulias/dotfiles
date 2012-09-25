@@ -211,7 +211,7 @@ let g:tagbar_autofocus = 1
 " Bundle: http://github.com/godlygeek/tabular.git
 
 
-" Ack, a better grep 
+" Ack, a better grep
 " Bundle: http://github.com/mileszs/ack.vim
 let g:ackprg="ack-grep -H --nocolor --nogroup --column"
 
@@ -294,12 +294,10 @@ let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
 " Rainbow parentheses
 " Bundle: https://github.com/vim-scripts/Rainbow-Parentheses-Improved.git
 
-" Rails plugin
-" Bundle: https://github.com/tpope/vim-rails.git
-
-" Vim ruby
-" Bundle: https://github.com/vim-ruby/vim-ruby.git
-
+" PHPQATools
+" Bundle: https://github.com/joonty/vim-phpqa.git
+let g:phpqa_messdetector_ruleset = "~/.vim/phpmd/phpmd.xml"
+let g:phpqa_codesniffer_args = "--standard=PSR2"
 
 "**************************************************************
 "                Autocmds and keybindings                     *
