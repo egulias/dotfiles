@@ -28,10 +28,13 @@ snippet useval
 snippet usewebt
 	use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+#Doctrine Dump
+snippet ddump
+	\Doctrine\Common\Util\Debug::dump(${1})
 
 # symfony2 boilerplate code
 snippet sfent
-	namespace ${1:Ideup}\${2:Acme}Bundle\Entity;
+	namespace ${1:Vendor}\${2:Acme}Bundle\Entity;
 
 	use Doctrine\ORM\Mapping as ORM;
 
@@ -54,7 +57,7 @@ snippet sfent
 		${5:// code ...}
 	}
 snippet sfmodel
-	namespace ${1:Ideup}\${2:Acme}Bundle\Model;
+	namespace ${1:Vendor}\${2:Acme}Bundle\Model;
 
 	use Doctrine\ORM\Mapping as ORM;
 
@@ -66,7 +69,7 @@ snippet sfmodel
 		${5:// code ...}
 	}
 snippet sfrepo
-	namespace ${1:Ideup}\${2:Acme}Bundle\Entity;
+	namespace ${1:Vendor}\${2:Acme}Bundle\Entity;
 
 	use Doctrine\ORM\EntityRepository;
 
@@ -87,7 +90,7 @@ snippet sfrepo
 	    }
 	}
 snippet sfcont
-	namespace ${1:Ideup}\${2:Acme}Bundle\Controller;
+	namespace ${1:Vendor}\${2:Acme}Bundle\Controller;
 
 	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 	use Symfony\Component\HttpFoundation\Response;
@@ -112,7 +115,7 @@ snippet sfcont
 	    }
 	}
 snippet sfformtype
-	namespace ${1:Ideup}\${2:Acme}Bundle\Form\Type;
+	namespace ${1:Vendor}\${2:Acme}Bundle\Form\Type;
 
 	use Symfony\Component\Form\AbstractType;
 	use Symfony\Component\Form\FormBuilder;
@@ -147,7 +150,7 @@ snippet sfformtype
 	    }
 	}
 snippet sfformhandler
-	namespace ${1:Ideup}\${2:Acme}Bundle\Form\Handler;
+	namespace ${1:Vendor}\${2:Acme}Bundle\Form\Handler;
 
 	use Symfony\Component\Form\Form;
 	use Symfony\Component\HttpFoundation\Request;
@@ -169,7 +172,7 @@ snippet sfformhandler
 	    }
 	}
 snippet sfform
-	namespace ${1:Ideup}\${2:Acme}Bundle\Form;
+	namespace ${1:Vendor}\${2:Acme}Bundle\Form;
 
 	use Symfony\Component\Validator\Constraints as Assert;
 	use Symfony\Component\Validator\ExecutionContext;
@@ -200,6 +203,8 @@ snippet sfform
 			}
 		}
 	}
+snippet liipwt
+	use Liip\FunctionalTestBundle\Test\WebTestCase;
 
 
 # Doctrine ORM snippets
