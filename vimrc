@@ -132,7 +132,7 @@ nnoremap gR gD[{V%:s/<C-R>///gc<left><left><left>
 
 " NerdTree
 " Bundle: http://github.com/scrooloose/nerdtree.git
-map <F1> :NERDTreeToggle<CR>
+map <F3> :NERDTreeToggle<CR>
 
 
 " Neocomplcache, better completion and intellisense-like features
@@ -184,16 +184,7 @@ nnoremap <Leader>pd :call PhpDocSingle()<CR>
 
 
 " Syntastic, syntax checker for various languages
-" undle: http://github.com/scrooloose/syntastic.git
-"
-" Clone this repository into PHP CodeSniffer standards directory:
-"
-" git clone http://github.com/opensky/Symfony2-coding-standard.git Symfony2
-"
-" And execute this command:
-"
-" phpcs --config-set default_standard Symfony2
-
+" Bundle: http://github.com/scrooloose/syntastic.git
 
 " TagBar
 " Bundle: git://github.com/majutsushi/tagbar
