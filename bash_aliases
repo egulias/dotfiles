@@ -37,3 +37,6 @@ alias pbpaste="xsel --clipboard --output"
 alias phplog="tail -f /tmp/php_errors.log"
 alias sf=app/console
 alias ag=ack-grep
+
+#composer
+alias composer="composer.phar"
