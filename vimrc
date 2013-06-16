@@ -169,13 +169,13 @@ let g:neocomplcache_enable_at_startup = 1
 let php_sql_query = 1
 let php_htmlInStrings = 1
 let php_parent_error_close = 1
-let php_folding = 3
+let php_folding = 2
 let php_baselib = 1
 let php_special_vars = 1
 
 
 " PHP Debugger
-" Bundle: https://github.com/vim-scripts/DBGPavim.git
+" https://github.com/vim-scripts/DBGPavim.git
 
 
 " PHP Documentor for Vim
@@ -233,7 +233,7 @@ let g:user_zen_settings = { 'indentation': '  ' }
 
 " Gundo
 " Bundle: http://github.com/sjl/gundo.vim.git
-nnoremap <F3> :GundoToggle<CR>
+nnoremap <F4> :GundoToggle<CR>
 
 
 " Camel case motion

@@ -126,8 +126,8 @@ autocmd FileType html       set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css        set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml        set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php        set omnifunc=phpcomplete#CompletePHP
-autocmd FileType c          set omnifunc=ccomplete#Complete
-autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
+"autocmd FileType c          set omnifunc=ccomplete#Complete
+"autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
 
 " Ruby & rails omnicompletion tweaks
 "autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading=1
@@ -137,7 +137,7 @@ autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
 " Rainbow parentheses
 autocmd syntax * call rainbow#load([['(',')'],['\[','\]'],['{','}']])
 autocmd syntax python call rainbow#load([['(',')'],['\[','\]'],['{','}'],['begin','end']])
-autocmd syntax ruby call rainbow#load([['(',')'],['\[','\]'],['{','}'],['if','end']])
+"autocmd syntax ruby call rainbow#load([['(',')'],['\[','\]'],['{','}'],['if','end']])
 
 " Omnicompletion menu navigation keys
 function! OmniPopup(action)
