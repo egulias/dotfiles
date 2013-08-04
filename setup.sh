@@ -24,8 +24,10 @@ configure_git() {
   git config --global color.ui always
   git config --global alias.df diff
   git config --global alias.pr "pull --rebase --stat"
-  git confif --global alias.in "merge --squash --commit"
+  git config --global alias.in "merge --squash --commit"
   git config --global core.editor vim
+  git config --global alias.lol "log --graph --decorate --pretty=oneline --abbrev-commit"
+  git config --global alias.lola "log --graph --decorate --pretty=oneline --abbrev-commit --all --date=local"
 }
 
 echo "Saving old files ..."
