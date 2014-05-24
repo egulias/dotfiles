@@ -282,9 +282,6 @@ let g:ctrlp_map = '<Leader>t'
 let g:ctrlp_use_caching = 1
 let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
 
-" Rainbow parentheses
-" Bundle: https://github.com/vim-scripts/Rainbow-Parentheses-Improved-and2.git
-
 " PHPQATools
 " Bundle: https://github.com/joonty/vim-phpqa.git
 let g:phpqa_messdetector_ruleset = "~/.vim/phpmd/phpmd.xml"
