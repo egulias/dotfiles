@@ -1,5 +1,5 @@
 " init patogen system
-call pathogen#runtime_append_all_bundles()
+call pathogen#infect()
 call pathogen#helptags()
 
 set nocompatible   " don't be compatible with legacy vi
@@ -56,7 +56,7 @@ set background=dark    " your eyes will thank you
 if has("gui_running")
   colorscheme vombato
 else
-  colorscheme wombat256
+  colorscheme wombat
 endif
 
 " vim behaviour
@@ -226,7 +226,7 @@ let delimitMate_visual_leader = ","
 
 
 " Zen Coding
-" Bundle: http://github.com/mattn/zencoding-vim.git
+" Bundle: http://github.com/mattn/emmet-vim.git
 let g:user_zen_leader_key = '<c-z>'
 let g:user_zen_settings = { 'indentation': '  ' }
 
@@ -266,7 +266,7 @@ endif
 
 
 " Vombato, an improved wombat color scheme
-" Bundle: https://github.com/molok/vim-vombato-colorscheme.git
+" Bundle: https://github.com/sheerun/vim-wombat-scheme
 
 " Pyte, a light color schema
 " Bundle: https://github.com/vim-scripts/pyte.git
